@@ -1,0 +1,4 @@
+# git ignore for NewsSA
+
+# ignore virtual environment
+venv/
