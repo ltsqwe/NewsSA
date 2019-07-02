@@ -5,8 +5,9 @@ from .PrintLog import pld
 
 
 ##### build format #####
-def build_contents(title_words, body_words, sentiments):
+def build_contents(url, title_words, body_words, sentiments):
     a_news = {
+        'url': url,
         'title': title_words,
         'body': body_words,
         'sentiments': sentiments,
@@ -90,13 +91,13 @@ def get_valid_urls(q_path, c_path, urls, verbose=True):
 
 ##### To newsData & completed #####
 def pop_queue(q_path, verbose=True):
-    top = first(q_path)
+    top = first(q_path, False)
 
     pl("Popping the first element in queue... ", verbose)
     if top is None:
         pl("The queue is Empty! Nothing to pop.\n", verbose)
         return
-    remove_url(q_path, top)
+    remove_url(q_path, top, verbose)
     pld(verbose)
     return top
 
@@ -152,9 +153,13 @@ def first(file_path, verbose=True):
     pld(verbose)
     pl("Getting first url in list...", verbose)
     if not jo['url'] == []:
-        pl("Url list is empty. Nothing the fetch!\n", verbose)
+        url = jo['url'][0]
+        pl(url + "   ", verbose)
+        pld(verbose)
         return jo['url'][0]
-    pld(verbose)
+    else:
+        pl("Url list is empty. Nothing the fetch!\n", verbose)
+
 
 
 def open_json(file_path):        # return dict
