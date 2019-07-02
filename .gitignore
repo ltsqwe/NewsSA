@@ -3,3 +3,5 @@
 # ignore virtual environment
 venv/
 .idea/
+src/data
+src/__pycache__
